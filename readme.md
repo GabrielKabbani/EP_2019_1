@@ -2,6 +2,6 @@ Exercício Programa - 2019/1 - Design de Software
 ------------------------------------------------
 
 Alunos: 
-- Fulano da Silva, fulanos@insper.edu.br
-- Sicrano de Almeida, sicranoa1@insper.edu.br
+- Gabriel Maurício Kabbani, gabrielmk@al.insper.edu.br
+- Jonathan Mansur, jonathanm1@al.insper.edu.br
 
