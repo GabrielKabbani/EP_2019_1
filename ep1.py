@@ -67,7 +67,7 @@ def main():
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
         else:
-            print("Escolha sua opção:")
+            print("Escolha a sua opção:")
             print(opcoes)
             
             # Aluno B: substitua este comentário e a linha abaixo pelo código
