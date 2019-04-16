@@ -1,8 +1,8 @@
 # EP 2019-1: Escape Insper
 #
 # Alunos: 
-# - aluno A: Fulano da Silva, fulanos@insper.edu.br
-# - aluno B: Sicrano de Almeida, sicranoa1@insper.edu.br
+# - aluno A: Gabriel Mauricio Kabbani, gabrielmk@al.insper.edu.br
+# - aluno B: Jonathan Mansur, jonathanm1@al.insper.edu.br
 
 def carregar_cenarios():
     cenarios = {
@@ -67,9 +67,9 @@ def main():
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
         else:
-            print("Escolha a sua opção:")
-            print(opcoes)
-            
+            print("Escolha sua opção:")
+            for loc in opcoes:
+                print("{0}: {1}".format(loc,opcoes[loc]))
             # Aluno B: substitua este comentário e a linha abaixo pelo código
             # para pedir a escolha do usuário.
             escolha = input("O que você quer fazer?: ")
