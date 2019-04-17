@@ -35,8 +35,18 @@ def carregar_cenarios():
             "opcoes": {
                 "inicio": "Voltar para o saguao de entrada"
             }
-        }
+        },
+        "elevador": {
+                "titulo": "Elevador Schindler",
+                "descricao": "Você está no elevador",
+                "opcoes": {}
+        },
+        "escada": {
+                "titulo": "Escadeiras",
+                "descricao": "Você está nas escadas",
+                "opcoes": {}}
     }
+        
     nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
 
@@ -137,6 +147,8 @@ def main():
                                     
                 elif escolha=="andar professor":
                     print()
+                    ele_esc=input('Você pode ir de escada ou de elevador, qual você prefere?: ')
+                    #colocar que o cenario pode virar a escada ou o elevador, nao esquecer de re-alterar para o andar professor dps.
                     if "lanterna" not in itens:
                         print()
                         print("O corredor está muito escuro, você precisa arranjar uma lanterna...")
