@@ -1,8 +1,8 @@
 # EP 2019-1: Escape Insper
 #
 # Alunos: 
-# - aluno A: Gabriel Mauricio Kabbani, gabrielmk@al.insper.edu.br
-# - aluno B: Jonathan Mansur, jonathanm1@al.insper.edu.br
+# - aluno A: Jonathan Mansur, jonathanm1@al.insper.edu.br
+# - aluno B: Gabriel Mauricio Kabbani, gabrielmk@al.insper.edu.br 
 
 def carregar_cenarios():
     cenarios = {
@@ -68,11 +68,11 @@ def main():
     itens=[]
     pontos_aluno={"hit points": 20, "pontos de ataque": 5,"pontos de defesa": 5}
     pontos_biblio={"hit points": 5, "pontos de ataque": 2,"pontos de defesa": 2}
+    pontos_predador={"hit points": 3, "pontos de ataque": 7,"pontos de defesa": 7}
     objetos=["lanterna","chave de fenda", "clips"]
     game_over = False
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
-
         # Aluno A: substitua este comentário pelo código para imprimir 
         # o cenário atual.
 
@@ -96,6 +96,8 @@ def main():
                 nome_cenario_atual = escolha
                 if escolha == "biblioteca":
                     cont+=1
+                    xal=[0,0,0]
+                    xbib=[0,0,0]
                     print("Você se deparou com um estoque infinito de três tipos de objetos.")
                     print()
                     print("Os objetos são: {0}".format(objetos))
@@ -116,46 +118,157 @@ def main():
                         decision=input('O que você deseja fazer? lutar ou fugir?: ')
                         if decision=='lutar':
                             if pontos_aluno['hit points']>pontos_biblio['hit points']:
-                                pontos_aluno['hit points']-=2
+
                                 if pontos_aluno['pontos de ataque']>pontos_biblio['pontos de defesa']:
-                                    print('Parabéns!!! Você ganhou! Pode prosseguir.')
-                                    pontos_aluno['pontos de ataque']-=pontos_biblio['pontos de defesa']
+                                    print('Parabéns!!! Você ganhou, com direito à um aumento de pontos de ataque! Pode prosseguir.')
+                                    xal=[0,pontos_biblio['pontos de defesa'],0]
+                                    xbib=[0,-2,-1]
                                 elif pontos_aluno['pontos de ataque']<pontos_biblio['pontos de defesa']:
                                     print('OOOPSSSS, VOCÊ PERDEU')
                                     print('Você perdeu um ponto de ataque, e o último item que você pegou...')
-                                    pontos_aluno['pontos de ataque']-=1
-                                    del itens[-1]
+                                    xal=[0,-1,0]
+                                    if len(itens)>0:
+                                        del itens[-1]
                                 elif pontos_aluno['pontos de ataque']==pontos_biblio['pontos de defesa']:
                                     print('Que sorte, o combate empatou... Você não perdeu nada!')
+                                pontos_aluno['hit points']-=2
                             if pontos_aluno['hit points']<pontos_biblio['hit points']:
-                                pontos_biblio['hit points']-=2
                                 if pontos_aluno['pontos de defesa']>pontos_biblio['pontos de ataque']:
                                     print('Parabéns!!! Você se defendeu! Pode prosseguir.')
+                                    print('Você ganhou um ponto de defesa')
+                                    xal=[0,0,1]
                                 elif pontos_aluno['pontos de defesa']<pontos_biblio['pontos de ataque']:
                                     print('OOOPSSSS, VOCÊ PERDEU')
                                     print('Você perdeu um ponto de defesa, e o último item que você pegou (caso tenha)...')
-                                    pontos_aluno['pontos de defesa']-=1
-                                    del itens[-1]
+                                    if len(itens)>0:
+                                        del itens[-1]
+                                    xal[0,0,-1]
                                 elif pontos_aluno['pontos de defesa']==pontos_biblio['pontos de ataque']:
                                     print('Que sorte, o combate empatou... Você não perdeu nada!')
+                                pontos_biblio['hit points']-=2
                             if pontos_aluno['hit points']==pontos_biblio['hit points']:
                                 print('Que sorte... vocês empataram. Pode prosseguir.')
+                            pontos_aluno["hit points"]+=xal[0]
+                            pontos_aluno["pontos de ataque"]+=xal[1]
+                            pontos_aluno["pontos de defesa"]+=xal[2]
+                            pontos_biblio["hit points"]+=xbib[0]
+                            pontos_biblio["pontos de ataque"]+=xbib[1]
+                            pontos_biblio["pontos de defesa"]+=xbib[2]
                         if decision=='fugir':
                             print('Ihhhh arregão')
-                            print('Você foi jogado pela bibliotecário ao saguão')
+                            print('Você foi jogado pela bibliotecária ao saguão')
                             nome_cenario_atual="inicio"
                                     
                 elif escolha=="andar professor":
+                    cont+=1
+                    xal=[0,0,0]
+                    xpred=[0,0,0]
                     print()
                     ele_esc=input('Você pode ir de escada ou de elevador, qual você prefere?: ')
-                    #colocar que o cenario pode virar a escada ou o elevador, nao esquecer de re-alterar para o andar professor dps.
-                    if "lanterna" not in itens:
+                    if ele_esc!="elevador" and ele_esc!="escada":
+                        ele_esc=input('Você deve escrever elevador ou escada, para declarar a sua escolha. Qual você escolhe?: ')
+                    elif ele_esc=="elevador":
+                        nome_cenario_atual="elevador"
+                        cenario_atual = cenarios[nome_cenario_atual]
+                        opcoes = cenario_atual['opcoes']
+                        # Aluno A: substitua este comentário pelo código para imprimir 
+                        # o cenário atual.
+                        #nao esquecer de re-alterar para o andar professor dps.
+                        nome_cenario_atual="andar professor"
+                        cenario_atual = cenarios[nome_cenario_atual]
+                        opcoes = cenario_atual['opcoes']
+                    elif ele_esc=="escada":
+                        nome_cenario_atual="escada"
+                        cenario_atual = cenarios[nome_cenario_atual]
+                        opcoes = cenario_atual['opcoes']
+                        if cont%2==0:
+                            print()
+                            print ('Você se deparou com o predador!')
+                            print('Ele pode comer as coisas que você tem, diminuindo os itens de sua sacola')
+                            print()
+                            print ('Você: {0}'.format(pontos_aluno))
+                            print ('Predador: {0}'.format(pontos_biblio))
+                            dec=input('O que você deseja fazer? lutar ou fugir?: ')
+                            if dec=='lutar':
+                                if pontos_aluno['hit points']>pontos_predador['hit points']:
+                                    if pontos_aluno['pontos de ataque']>pontos_predador['pontos de defesa']:
+                                        print('Parabéns!!! Você ganhou! Pode prosseguir.')
+                                        xal=[0,pontos_predador['pontos de defesa'],0]
+                                        xpred=[0,-2,-1]
+                                        nome_cenario_atual="andar professor"
+                                        cenario_atual = cenarios[nome_cenario_atual]
+                                        opcoes = cenario_atual['opcoes']
+                                    #PORQUE QUE ELE TA ENTRANDO NESSE ELIF MSM QDO ERA PRO CARA GANHAR!!!!!!!!!!!!!!!!!!!!!!!
+                                    elif pontos_aluno['pontos de ataque']<pontos_predador['pontos de defesa']:
+                                        print('OOOPSSSS, VOCÊ PERDEU')
+                                        print('Você perdeu um ponto de ataque, e o último item que você pegou...')
+                                        nome_cenario_atual="inicio"
+                                        cenario_atual = cenarios[nome_cenario_atual]
+                                        opcoes = cenario_atual['opcoes']
+                                        xal=[0,-1,0]
+                                        if len(itens)>0:
+                                            del itens[-1]
+                                    elif pontos_aluno['pontos de ataque']==pontos_predador['pontos de defesa']:
+                                        print('Que sorte, o combate empatou... Você não perdeu nada!')
+                                        nome_cenario_atual="andar professor"
+                                        cenario_atual = cenarios[nome_cenario_atual]
+                                        opcoes = cenario_atual['opcoes']
+                                    pontos_aluno['hit points']-=2
+                                if pontos_aluno['hit points']<pontos_predador['hit points']:
+                                    if pontos_aluno['pontos de defesa']>pontos_predador['pontos de ataque']:
+                                        print('Parabéns!!! Você se defendeu! Pode prosseguir.')
+                                        nome_cenario_atual="andar professor"    
+                                        cenario_atual = cenarios[nome_cenario_atual]
+                                        opcoes = cenario_atual['opcoes']
+                                    elif pontos_aluno['pontos de defesa']<pontos_predador['pontos de ataque']:
+                                        print('OOOPSSSS, VOCÊ PERDEU')
+                                        print('Você perdeu um ponto de defesa, e o último item que você pegou (caso tenha)...')
+                                        print("Você será redirecionado ao saguão")
+                                        pontos_aluno['pontos de defesa']-=1
+                                        nome_cenario_atual="inicio"
+                                        cenario_atual = cenarios[nome_cenario_atual]
+                                        opcoes = cenario_atual['opcoes']
+                                        xal=[0,0,-1]
+                                        if len(itens)>0:
+                                            del itens[-1]
+                                    elif pontos_aluno['pontos de defesa']==pontos_predador['pontos de ataque']:
+                                        print('Que sorte, o combate empatou... Você não perdeu nada!')
+                                        nome_cenario_atual="andar professor"
+                                        cenario_atual = cenarios[nome_cenario_atual]
+                                        opcoes = cenario_atual['opcoes']
+                                    pontos_predador['hit points']-=2
+                                if pontos_aluno['hit points']==pontos_predador['hit points']:
+                                    print('Que sorte... vocês empataram. Pode prosseguir.')
+                                    nome_cenario_atual="andar professor"
+                                    cenario_atual = cenarios[nome_cenario_atual]
+                                    opcoes = cenario_atual['opcoes']
+                                pontos_aluno["hit points"]+=xal[0]
+                                pontos_aluno["pontos de ataque"]+=xal[1]
+                                pontos_aluno["pontos de defesa"]+=xal[2]
+                                pontos_predador["hit points"]+=xpred[0]
+                                pontos_predador["pontos de ataque"]+=xpred[1]
+                                pontos_predador["pontos de defesa"]+=xpred[2]
+                            if dec=='fugir':
+                                print('Oooopa, olha só que marica')
+                                print('Você foi jogado pelo predador ao saguão')
+                                nome_cenario_atual="inicio"
+                                cenario_atual = cenarios[nome_cenario_atual]
+                                opcoes = cenario_atual['opcoes']
+                        else:
+                            nome_cenario_atual="andar professor"
+                            cenario_atual = cenarios[nome_cenario_atual]
+                            opcoes = cenario_atual['opcoes']
+                        # Aluno A: substitua este comentário pelo código para imprimir 
+                        # o cenário atual.
+                        #nao esquecer de re-alterar para o andar professor dps.
+                    if "lanterna" not in itens and nome_cenario_atual=="andar professor":
                         print()
                         print("O corredor está muito escuro, você precisa arranjar uma lanterna...")
                         print()
                         print("Você será redirecionado pelos seguranças ao saguão.")
                         nome_cenario_atual="inicio"
                 elif escolha=="professor":
+                    cont+=1
                     print()
                     if "chave de fenda" and "clips" in itens:
                         print("Parabéns, você tem as ferramentas necessárias! Agora utilize seu clips e sua chave de fenda para conseguir destrancar a sala do professor.") 
