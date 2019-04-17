@@ -54,7 +54,9 @@ def main():
     print()
 
     cenarios, nome_cenario_atual = carregar_cenarios()
-
+    cont=0
+    itens=[]
+    objetos=["lanterna","chave de fenda", "clips"]
     game_over = False
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
@@ -64,18 +66,50 @@ def main():
 
         opcoes = cenario_atual['opcoes']
         if len(opcoes) == 0:
+            print()
             print("Acabaram-se suas opções! Mwo mwo mwooooo...")
             game_over = True
         else:
+            print()
             print("Escolha sua opção:")
-            for loc in opcoes:
-                print("{0}: {1}".format(loc,opcoes[loc]))
-            # Aluno B: substitua este comentário e a linha abaixo pelo código
-            # para pedir a escolha do usuário.
+            print()
+            for choice in opcoes:
+                print("{0}: {1}".format(choice,opcoes[choice]))
+                print()
+            print()
             escolha = input("O que você quer fazer?: ")
 
             if escolha in opcoes:
                 nome_cenario_atual = escolha
+                if escolha == "biblioteca":
+                    print("Você se deparou com um estoque infinito de três tipos de objetos.")
+                    print()
+                    print("Os objetos são: {0}".format(objetos))
+                    print()
+                    decisao=input("Você deseja pegar algum dos objetos? Caso afirmativo, digite sim: ")
+                    while decisao=="sim":
+                        print()
+                        item=input("Qual?")
+                        itens.append(item)
+                        print("Item adicionado à sua sacola")
+                        decisao=input("Você deseja pegar mais algum dos objetos? Caso afirmativo, digite sim: ")
+                if escolha=="andar professor":
+                    print()
+                    if "lanterna" not in itens:
+                        print()
+                        print("O corredor está muito escuro, você precisa arranjar uma lanterna...")
+                        print()
+                        print("Você será redirecionado pelos seguranças ao saguão.")
+                        nome_cenario_atual="inicio"
+                if escolha=="professor":
+                    print()
+                    if "chave de fenda" and "clips" in itens:
+                        print("Parabéns, você tem as ferramentas necessárias! Agora utilize seu clips e sua chave de fenda para conseguir destrancar a sala do professor.") 
+                    else:
+                        print("Você precisa de um clips e de uma chave de fenda para destrancar a sala do professor.")
+                        print() 
+                        print("Você será levado de volta ao saguão pelos seguranças.")
+                        nome_cenario_atual="inicio"
             else:
                 print("Sua indecisão foi sua ruína!")
                 game_over = True
