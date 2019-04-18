@@ -11,7 +11,8 @@ def carregar_cenarios():
             "descricao": "Voce esta no saguao de entrada do insper",
             "opcoes": {
                 "andar professor": "Tomar o elevador para o andar do professor",
-                "biblioteca": "Ir para a biblioteca"
+                "biblioteca": "Ir para a biblioteca",
+                "sala mágica": "Tentar entrar na sala mágica"
             }
         },
         "andar professor": {
@@ -44,7 +45,12 @@ def carregar_cenarios():
         "escada": {
                 "titulo": "Escadeiras",
                 "descricao": "Você está nas escadas",
-                "opcoes": {}}
+                "opcoes": {}},
+        "sala mágica": {
+                "titulo": "Salinha da magia",
+                "descricao": "Voce está em um ambiente mágico, que libera super poderes de luta",
+                "opcoes": {"inicio": "Voar para o saguão"} 
+                }
     }
         
     nome_cenario_atual = "inicio"
@@ -98,6 +104,20 @@ def main():
 
             if escolha in opcoes:
                 nome_cenario_atual = escolha
+                if escolha=="sala mágica":
+                    if "clips" and "chave de fenda" in itens and cont%2!=0:
+                        print()
+                        print("Bem vindo à sala mágica")
+                        print("Você pode escolher receber hit points, pontos de ataque, ou de defesa.")
+                        d=input("Qual você quer? ")
+                        if d=="hit points":
+                            pontos_aluno["hit points"]+=5
+                        if d=="pontos de ataque":
+                            pontos_aluno["pontos de ataque"]+=5
+                        if d=="hit points":
+                            pontos_aluno["pontos de defesa"]+=5
+                    else:
+                        print("Você precisa de um clips e uma chave de fenda pra entrar")
                 if escolha == "biblioteca":
                     print()
                     print("Caverna da tranquilidade")
