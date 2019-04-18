@@ -198,7 +198,7 @@ def main():
                                         nome_cenario_atual="andar professor"
                                         cenario_atual = cenarios[nome_cenario_atual]
                                         opcoes = cenario_atual['opcoes']
-                                    #PORQUE QUE ELE TA ENTRANDO NESSE ELIF MSM QDO ERA PRO CARA GANHAR!!!!!!!!!!!!!!!!!!!!!!!
+                                    #PORQUE QUE ELE TA ENTRANDO NESSE ELIF MSM QDO ERA PRO CARA GANHAR!!!!!!!!!!!!!!!!!!!!!!!!!!
                                     elif pontos_aluno['pontos de ataque']<pontos_predador['pontos de defesa']:
                                         print('OOOPSSSS, VOCÊ PERDEU')
                                         print('Você perdeu um ponto de ataque, e o último item que você pegou...')
