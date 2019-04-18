@@ -81,6 +81,7 @@ def main():
         cenario_atual = cenarios[nome_cenario_atual]
         
         print()
+        print()
         print(cenario_atual["titulo"])
         trav="-"*len(cenario_atual["titulo"])
         print(trav)
@@ -105,19 +106,29 @@ def main():
             if escolha in opcoes:
                 nome_cenario_atual = escolha
                 if escolha=="sala mágica":
+                    cont+=1
                     if "clips" and "chave de fenda" in itens and cont%2!=0:
                         print()
+                        print(cenario_atual["titulo"])
+                        trav="-"*len(cenario_atual["titulo"])
+                        print(trav)
+                        print(cenario_atual["descricao"])
+                        print()
+                        print()
                         print("Bem vindo à sala mágica")
-                        print("Você pode escolher receber hit points, pontos de ataque, ou de defesa.")
+                        print("Você pode escolher receber hit points, pontos de ataque, ou pontos de defesa.")
                         d=input("Qual você quer? ")
                         if d=="hit points":
                             pontos_aluno["hit points"]+=5
                         if d=="pontos de ataque":
-                            pontos_aluno["pontos de ataque"]+=5
-                        if d=="hit points":
-                            pontos_aluno["pontos de defesa"]+=5
+                            pontos_aluno["pontos de ataque"]+=2
+                        if d=="pontos de defesa":
+                            pontos_aluno["pontos de defesa"]+=2
+                        if d!="hitpoints" and d!="pontos de ataque" and d!="pontos de defesa":
+                            print("A sala ficou brava que você não escreveu sua escolha da maneira correta e decidiu não te dar nada. Próxima vez escreva tudo de maneira simples, sem letra maiúscula, como está escrito na pergunta da sala!")
                     else:
-                        print("Você precisa de um clips e uma chave de fenda pra entrar")
+                        print("A sala está fechada... tente de novo mais tarde. Não se esqueça de pegar a chave de fenda e o clips para abrir a sala!")
+
                 if escolha == "biblioteca":
                     print()
                     print("Caverna da tranquilidade")
