@@ -62,7 +62,7 @@ def main():
         "na entrada do Insper, e quer procurar o professor para pedir um "
         "adiamento do EP (boa sorte...)")
     print()
-
+    
     cenarios, nome_cenario_atual = carregar_cenarios()
     cont=0
     itens=[]
@@ -73,9 +73,13 @@ def main():
     game_over = False
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
-        # Aluno A: substitua este comentário pelo código para imprimir 
-        # o cenário atual.
-
+        
+        print()
+        print(cenario_atual["titulo"])
+        trav="-"*len(cenario_atual["titulo"])
+        print(trav)
+        print(cenario_atual["descricao"])
+        print()
 
         opcoes = cenario_atual['opcoes']
         if len(opcoes) == 0:
@@ -171,9 +175,12 @@ def main():
                         nome_cenario_atual="elevador"
                         cenario_atual = cenarios[nome_cenario_atual]
                         opcoes = cenario_atual['opcoes']
-                        # Aluno A: substitua este comentário pelo código para imprimir 
-                        # o cenário atual.
-                        #nao esquecer de re-alterar para o andar professor dps.
+                        print()
+                        print(cenario_atual["titulo"])
+                        trav="-"*len(cenario_atual["titulo"])
+                        print(trav)
+                        print(cenario_atual["descricao"])
+                        print()
                         nome_cenario_atual="andar professor"
                         cenario_atual = cenarios[nome_cenario_atual]
                         opcoes = cenario_atual['opcoes']
@@ -181,6 +188,12 @@ def main():
                         nome_cenario_atual="escada"
                         cenario_atual = cenarios[nome_cenario_atual]
                         opcoes = cenario_atual['opcoes']
+                        print()
+                        print(cenario_atual["titulo"])
+                        trav="-"*len(cenario_atual["titulo"])
+                        print(trav)
+                        print(cenario_atual["descricao"])
+                        print()
                         if cont%2==0:
                             print()
                             print ('Você se deparou com o predador!')
