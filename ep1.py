@@ -99,6 +99,12 @@ def main():
             if escolha in opcoes:
                 nome_cenario_atual = escolha
                 if escolha == "biblioteca":
+                    print()
+                    print("Caverna da tranquilidade")
+                    t="-"*len("caverna da tranquilidade")
+                    print(t)
+                    print("Você está na biblioteca")
+                    print()
                     cont+=1
                     xal=[0,0,0]
                     xbib=[0,0,0]
@@ -271,8 +277,6 @@ def main():
                             nome_cenario_atual="andar professor"
                             cenario_atual = cenarios[nome_cenario_atual]
                             opcoes = cenario_atual['opcoes']
-                        # Aluno A: substitua este comentário pelo código para imprimir 
-                        # o cenário atual.
                         #nao esquecer de re-alterar para o andar professor dps.
                     if "lanterna" not in itens and nome_cenario_atual=="andar professor":
                         print()
