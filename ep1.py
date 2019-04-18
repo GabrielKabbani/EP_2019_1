@@ -1,8 +1,8 @@
 # EP 2019-1: Escape Insper
 #
 # Alunos: 
-# - aluno A: Jonathan Mansur, jonathanm1@al.insper.edu.br
-# - aluno B: Gabriel Mauricio Kabbani, gabrielmk@al.insper.edu.br 
+# - Aluno A: Jonathan Mansur, jonathanm1@al.insper.edu.br
+# - Aluno B: Gabriel Mauricio Kabbani, gabrielmk@al.insper.edu.br 
 
 def carregar_cenarios():
     cenarios = {
