@@ -54,8 +54,26 @@ def carregar_cenarios():
                 },
         "sala transporte": {
                 "titulo": "Transportador mágico",
-                "descricao": "Voce está em um transportador inovador desenvolvido pelos alunos do Insper. Ele tem a capacidade de te levar para salas conhecidas dos dois prédios (ou mesmo uma ou outra secreta).",
-                "opcoes": {"inicio": "Voar para o saguão", "professor": "Tentar entrar na sala do professor", "sala mágica": "Ser teletransportado à magia","biblioteca": "ler muitos livros","andar professor":"ir ao andar do professor}
+                "descricao": "Voce está em um transportador inovador desenvolvido pelos alunos do Insper. Ele tem a capacidade de te levar para algumas salas secretas do Insper.",
+                "opcoes": {"sala dos animais":"Tentar entrar na sala animal", "sala do mago": "tentar entrar na sala em que reside o grande mago do Insper", "sala secreta": "tentar entrar na sala desconhecida"}
+                },
+        "sala secreta": {
+                "titulo": "Uma das três salas secretas Insper",
+                "cor": "laranja",
+                "descricao": "Quem dirá o que pode estar presente nesta sala...",
+                "opcoes":{"inicio": "voltar ao saguão"}
+                },
+        "sala do mago": {
+                "titulo": "Uma das três salas secretas Insper",
+                "cor":"marrom",
+                "descricao": "Quem dirá o que pode estar presente nesta sala...",
+                "opcoes":{"inicio": "voltar ao saguão"}
+                },
+        "sala dos animais": {
+                "titulo": "Uma das três salas secretas Insper",
+                "cor":"amarelo",
+                "descricao": "Quem dirá o que pode estar presente nesta sala...",
+                "opcoes":{"inicio": "voltar ao saguão"}
                 }
     }
         
@@ -93,6 +111,7 @@ def main():
         print(trav)
         print(cenario_atual["descricao"])
         print()
+        print()
 
         opcoes = cenario_atual['opcoes']
         if len(opcoes) == 0:
@@ -103,6 +122,18 @@ def main():
             print()
             print("Escolha sua opção:")
             print()
+            if cont==7:
+                print()
+                print("EASTER EGG: A cor da sala do mago é MARROM")
+                print()
+            elif cont==12:
+                print()
+                print ("EASTER EGG: A cor da sala dos animais é AMARELO")
+                print()
+            elif cont==17:
+                print()
+                print("EASTER EGG: A cor da sala secreta é LARANJA")
+                print()
             for choice in opcoes:
                 print("{0}: {1}".format(choice,opcoes[choice]))
                 print()
@@ -113,6 +144,9 @@ def main():
                 nome_cenario_atual = escolha
                 opcoes = cenario_atual['opcoes']
                 cenario_atual = cenarios[nome_cenario_atual]
+                
+                
+                
                 if escolha=="sala mágica":
                     cont+=1
                     if "clips" and "chave de fenda" in itens and cont%2!=0:
@@ -128,21 +162,101 @@ def main():
                         d=input("Qual você quer? ")
                         if d=="hit points":
                             pontos_aluno["hit points"]+=5
-                        if d=="pontos de ataque":
+                        elif d=="pontos de ataque":
                             pontos_aluno["pontos de ataque"]+=2
-                        if d=="pontos de defesa":
+                        elif d=="pontos de defesa":
                             pontos_aluno["pontos de defesa"]+=2
-                        if d!="hit points" and d!="pontos de ataque" and d!="pontos de defesa":
+                        elif d!="hit points" and d!="pontos de ataque" and d!="pontos de defesa":
                             print("A sala ficou brava que você não escreveu sua escolha da maneira correta e decidiu não te dar nada. Próxima vez escreva tudo de maneira simples, sem letra maiúscula, como está escrito na pergunta da sala!")
                     else:
                         print("A sala está fechada... tente de novo mais tarde. Não se esqueça de pegar a chave de fenda e o clips para abrir a sala!")
-                if escolha == "sala transporte":
+                
+                
+                
+                elif escolha == "sala transporte":
+                    cont+=1
+                    nome_cenario_atual="sala transporte"
+                    cenario_atual = cenarios[nome_cenario_atual]
+                    opcoes = cenario_atual['opcoes']
+                    if cont%2!=0:
+                        print("Opsss.. sala fechada, desculpa... você será levado ao saguão.")
+                        nome_cenario_atual="inicio"
+                    print()
                     print("Bem vindo à estação")
-                    for choice in opcoes:
-                        print("{0}: {1}".format(choice,opcoes[choice]))
+                    print()
+                    elif cont%2==0:
+                        print("Que sorte, a sala está funcionando!")
                         print()
-                        #dar um jeito de mudar pro lugar q o cara inputar aqui
-                if escolha == "biblioteca":
+                        for choice in opcoes:
+                            print("{0}: {1}".format(choice,opcoes[choice]))
+                            print()
+                        lugar=input("Para qual lugar você deseja ser transportado?")
+                        print()
+                        print("Você será redirecionado ao lugar desejado, somente caso saiba adivinhar a cor da porta de entrada ao local que você deseja ir!")
+                        color=input("Qual cor você adivinha?: ")
+                        if color==cenarios[lugar]["cor"]:
+                            print("Correto! Você será transportado.")
+                            nome_cenario_atual=lugar
+                            escolha=lugar
+                        else:
+                            print("Cor errada... você será transportado ao saguão")
+                            nome_cenario_atual="inicio"
+                                
+                                
+                                
+                if escolha=="sala secreta":
+                    print()
+                    print("Bem-vindo à sala secreta")
+                    print("Aqui é o único lugar em que você receberá uma carta que contém informações reveladoras sobre quebras de ética do professor. Com essa carta na sua sacola, e somente assim, você conseguirá adiar a entrega do seu EP.")
+                    itens.append("Carta")
+                    print()
+                    print("Agora que você tem a carta, será redirecionado ao saguão")
+                    nome_cenario_atual="inicio"
+                    
+                    
+                
+                if escolha=="sala dos animais": 
+                    print()
+                    print("Bem-vindo à sala dos animais")
+                    print("Aqui reside um tigre e um leao, que podem talvez te ajudar.")
+                    ani=input("Qual deles você quer que te ajude? escreva leao ou tigre para decidir: ")
+                    if ani=="leao":
+                        print("O nobre leão te dá dicas sobre como fazer o seu EP em 15 minutos!")
+                        print("Assim, acaba de ser adicionado à sua sacola um EP prontinho para ser entregue!!!")
+                        print("Agora você será direcionado ao saguão")
+                        itens.append("EP")
+                    elif ani=="tigre":
+                        print("O feroz tigre ficou bravo que você quer burlar a data do EP, e comeu todos os itens de sua sacola...")
+                        print("Você será direcionado ao saguão")
+                    nome_cenario_atual="inicio"
+                    
+                
+                
+                if escolha=="sala do mago": 
+                    print()
+                    print("Bem-vindo à sala do grande mago do Insper.")
+                    print()
+                    numero_mago=2
+                    num=int(input("Escolha um número entre 0 e 2, caso ele esteja certo, você receberá a ajuda do mago: "))
+                    if numero_mago==num:
+                        print("Parabéns, você acertou o número.")
+                        print("O mago fez uma poção para você beber.")
+                        deci=input("Você deseja bebê-la? sim ou nao?: ")
+                        if deci=="sim":
+                            print("Sábia escolha, o mago adicionou um EP à sua sacola, pode ir à sala do professor entregá-lo")
+                            itens.append("EP")
+                        if deci=="nao":
+                            print("Que escolha ruim... você gastou tempo a toa.")
+                    else:
+                        print("Número errado...")
+                    print()
+                    print("Você será redirecionado ao saguão")
+                    nome_cenario_atual="inicio"
+                                    #COLOCAR UM JEITO DELE GANHART NO PROFESSOR
+                                    
+                                    
+                                    
+                elif escolha == "biblioteca":
                     print()
                     print("Caverna da tranquilidade")
                     t="-"*len("caverna da tranquilidade")
@@ -173,8 +287,8 @@ def main():
                         if decision=='lutar':
                             if pontos_aluno['hit points']>pontos_biblio['hit points']:
                                 if pontos_aluno['pontos de ataque']>pontos_biblio['pontos de defesa']:
-                                    print('Parabéns!!! Você ganhou, com direito à um aumento de pontos de ataque! Pode prosseguir.')
-                                    xal=[0,pontos_biblio['pontos de defesa']-1,0]
+                                    print('Parabéns!!! Você ganhou, com direito à um aumento de pontos de defesa! Pode prosseguir.')
+                                    xal=[0,0,pontos_biblio['pontos de defesa']-1]
                                     xbib=[0,-2,-1]
                                 elif pontos_aluno['pontos de ataque']<pontos_biblio['pontos de defesa']:
                                     print('OOOPSSSS, VOCÊ PERDEU')
@@ -212,6 +326,9 @@ def main():
                             print('Você foi jogado pela bibliotecária ao saguão')
                             nome_cenario_atual="inicio"
                                     
+                
+                
+                
                 elif escolha=="andar professor":
                     cont+=1
                     xal=[0,0,0]
@@ -258,7 +375,6 @@ def main():
                             dec=input('O que você deseja fazer? lutar ou fugir?: ')
                             if dec=='lutar':
                                 if pontos_aluno['hit points']>pontos_predador['hit points']:
-                                    print("ele entrou aqui")
                                     if pontos_aluno['pontos de ataque']>pontos_predador['pontos de defesa']:
                                         print('Parabéns!!! Você ganhou! Pode prosseguir.')
                                         xal=[0,pontos_predador['pontos de defesa'],0]
@@ -331,11 +447,33 @@ def main():
                         print()
                         print("Você será redirecionado pelos seguranças ao saguão.")
                         nome_cenario_atual="inicio"
-                elif escolha=="professor":
+                
+                
+                
+                elif escolha=="professor": #consertar opcoes mwomwo
                     cont+=1
                     print()
                     if "chave de fenda" and "clips" in itens:
                         print("Parabéns, você tem as ferramentas necessárias! Agora utilize seu clips e sua chave de fenda para conseguir destrancar a sala do professor.") 
+                        if "EP" and "Carta" not in itens:
+                            print("Você tem certeza que você quer entrar agora? Ele está bem bravo e você está de mãos abanando.")
+                            decisa=input("O que você quer fazer? fugir ou entrar?: ")
+                            if decisa=="fugir":
+                                print("Você será redirecionado ao saguão.")
+                                nome_cenario_atual="inicio"
+                        if "EP" in itens:
+                            print("Professor-- Olá!!! Você veio entregar seu EP? Pode deixar ele na minha mesa. Boa tarde.")
+                            game_over=True
+                        if "Carta" in itens:
+                            print("Professor--Você está maluco??? Daonde você tem essa carta?")
+                            print("Ok, vou lhe conceder uma extensão, mas isso quer dizer que você será pra sempre o meu aluno mais odiado")
+                            decis=input("Você quer aceitar a extensão? sim ou nao?: ")
+                            if decis=="sim":
+                                print("Professor-- essas crianças de hoje em dia não dá. Vá embora e faça seu trabalho")
+                                game_over=True
+                            if decis=="nao":
+                                print("Professor-- Você pode não ter um EP, mas tem meu respeito. Relaxa, é só 20% da nota!")
+                                game_over=True
                     else:
                         print("Você precisa de um clips e de uma chave de fenda para destrancar a sala do professor.")
                         print() 
@@ -344,8 +482,10 @@ def main():
             else:
                 print("Sua indecisão foi sua ruína!")
                 game_over = True
-                    
-    print("Você morreu!")
+    print()
+    print("Você está na parte de fora do Insper. Vá para casa!")
+    print()
+    print("Busca pelo EP=finalizada")
 
 
 # Programa principal.
