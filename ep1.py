@@ -184,7 +184,7 @@ def main():
                     print()
                     print("Bem vindo à estação")
                     print()
-                    elif cont%2==0:
+                    if cont%2==0:
                         print("Que sorte, a sala está funcionando!")
                         print()
                         for choice in opcoes:
