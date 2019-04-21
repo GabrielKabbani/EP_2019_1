@@ -96,7 +96,7 @@ def main():
     cenarios, nome_cenario_atual = carregar_cenarios()
     cont=0
     itens=[]
-    pontos_aluno={"hit points": 20, "pontos de ataque": 5,"pontos de defesa": 5}
+    pontos_aluno={"hit points": 12, "pontos de ataque": 5,"pontos de defesa": 5}
     pontos_biblio={"hit points": 5, "pontos de ataque": 2,"pontos de defesa": 2}
     pontos_predador={"hit points": 8, "pontos de ataque": 3,"pontos de defesa": 3}
     objetos=["lanterna","chave de fenda", "clips"]
@@ -181,10 +181,10 @@ def main():
                     if cont%2!=0:
                         print("Opsss.. sala fechada, desculpa... você será levado ao saguão.")
                         nome_cenario_atual="inicio"
-                    print()
-                    print("Bem vindo à estação")
-                    print()
                     if cont%2==0:
+                        print()
+                        print("Bem vindo à estação")
+                        print()
                         print("Que sorte, a sala está funcionando!")
                         print()
                         for choice in opcoes:
@@ -356,6 +356,7 @@ def main():
                         cenario_atual = cenarios[nome_cenario_atual]
                         opcoes = cenario_atual['opcoes']
                     elif ele_esc=="escada":
+                        print()
                         nome_cenario_atual="escada"
                         cenario_atual = cenarios[nome_cenario_atual]
                         opcoes = cenario_atual['opcoes']
@@ -455,7 +456,7 @@ def main():
                     print()
                     if "chave de fenda" and "clips" in itens:
                         print("Parabéns, você tem as ferramentas necessárias! Agora utilize seu clips e sua chave de fenda para conseguir destrancar a sala do professor.") 
-                        if "EP" and "Carta" not in itens:
+                        if "EP" not in itens and "Carta" not in itens:
                             print("Você tem certeza que você quer entrar agora? Ele está bem bravo e você está de mãos abanando.")
                             decisa=input("O que você quer fazer? fugir ou entrar?: ")
                             if decisa=="fugir":
