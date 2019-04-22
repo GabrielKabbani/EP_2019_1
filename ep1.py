@@ -252,9 +252,8 @@ def main():
                     print()
                     print("Você será redirecionado ao saguão")
                     nome_cenario_atual="inicio"
-                                    #COLOCAR UM JEITO DELE GANHART NO PROFESSOR
-                                    
-                                    
+                    
+                    
                                     
                 elif escolha == "biblioteca":
                     print()
