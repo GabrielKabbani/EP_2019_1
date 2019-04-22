@@ -1,7 +1,7 @@
 # EP 2019-1: Escape Insper
 #
 # Alunos: 
-# - Aluno A: Jonathan Mansur, jonathanm1@al.insper.edu.br
+# - Aluno A: Jonathan Mansur, ##jonathanm1@al.insper.edu.br
 # - Aluno B: Gabriel Mauricio Kabbani, gabrielmk@al.insper.edu.br 
 
 def carregar_cenarios():
@@ -12,7 +12,7 @@ def carregar_cenarios():
             "opcoes": {
                 "andar professor": "Tomar o elevador para o andar do professor",
                 "biblioteca": "Ir para a biblioteca",
-                "sala mágica": "Tentar entrar na sala mágica",
+                "sala magica": "Tentar entrar na sala magica",
                 "sala transporte": "Tentar entrar na sala capaz de moldar dimensões e transportar matéria"
             }
         },
@@ -47,7 +47,7 @@ def carregar_cenarios():
                 "titulo": "Escadeiras",
                 "descricao": "Você está nas escadas",
                 "opcoes": {}},
-        "sala mágica": {
+        "sala magica": {
                 "titulo": "Salinha da magia",
                 "descricao": "Voce está em um ambiente mágico, que libera super poderes de luta",
                 "opcoes": {"inicio": "Voar para o saguão"} 
@@ -147,7 +147,7 @@ def main():
                 
                 
                 
-                if escolha=="sala mágica":
+                if escolha=="sala magica":
                     cont+=1
                     if "clips" and "chave de fenda" in itens and cont%2!=0:
                         print()
