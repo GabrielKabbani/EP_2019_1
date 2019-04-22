@@ -451,7 +451,7 @@ def main():
                 
                 
                 
-                elif escolha=="professor": #consertar opcoes mwomwo
+                elif escolha=="professor":
                     cont+=1
                     print()
                     if "chave de fenda" and "clips" in itens:
